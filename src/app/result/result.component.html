@@ -1,0 +1,41 @@
+<ais-instantsearch [config]="config">
+  <div class="main">
+    <div>
+      <ais-refinement-list
+        operator="and"
+        attribute="type"
+        [searchable]="true"
+      ></ais-refinement-list>
+    </div>
+    <div>
+      <!-- 設定 -->
+      <ais-configure [searchParameters]="resultParams"></ais-configure>
+
+      <!-- 結果 -->
+      <ais-hits>
+        <ng-template let-hits="hits">
+          <ol class="ais-Hits-list">
+            <li *ngFor="let hit of hits" class="ais-Hits-item">
+              {{ hit.name }}
+            </li>
+          </ol>
+        </ng-template>
+      </ais-hits>
+
+      <ais-stats>
+        <ng-template let-state="state">
+          <p>{{ state.nbPages }}ページ</p>
+          <p>{{ state.nbHits }}件ヒットしました</p>
+          <p>{{ resultParams.page + 1 }}ページ目をみてます</p>
+
+          <button
+            *ngIf="resultParams.page + 1 < state.nbPages"
+            (click)="nextPage()"
+          >
+            次へ
+          </button>
+        </ng-template>
+      </ais-stats>
+    </div>
+  </div>
+</ais-instantsearch>

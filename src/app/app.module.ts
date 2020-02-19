@@ -1,5 +1,8 @@
+import { TopComponent } from './top/top.component';
+import { ResultComponent } from './result/result.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { NgAisModule } from 'angular-instantsearch';
 
@@ -15,7 +18,12 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, SearchInputComponent],
+  declarations: [
+    AppComponent,
+    SearchInputComponent,
+    TopComponent,
+    ResultComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,7 +33,18 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        pathMatch: 'full',
+        component: TopComponent
+      },
+      {
+        path: 'result',
+        component: ResultComponent
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

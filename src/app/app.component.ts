@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import * as algoliasearch from 'algoliasearch/lite/';
-import {
-  InstantSearchConfig,
-  SearchClient,
-  SearchParameters
-} from 'angular-instantsearch/instantsearch/instantsearch';
+import { Router } from '@angular/router';
+import { SearchParameters } from 'angular-instantsearch/instantsearch/instantsearch';
+import { environment } from 'src/environments/environment';
 
 const searchClient = algoliasearch(
-  'CQ04MZASL7',
-  '5caf57ddaea6361a3d2edf12ab3167e4'
+  environment.algolia.appId,
+  environment.algolia.apiKey
 );
 
 @Component({
@@ -21,23 +19,20 @@ export class AppComponent {
     hitsPerPage: 5
   };
 
-  resultParams = {
-    hitsPerPage: 5,
-    page: 0,
-    query: 'リ'
-  };
-
   config = {
     indexName: 'pokemons',
     searchClient
   };
 
-  search(value) {
-    const url = location.href;
-    console.log(url + '?name=' + value);
-  }
+  isDevMode = !environment.production;
 
-  nextPage() {
-    this.resultParams.page++;
+  constructor(private router: Router) {}
+
+  search(name: string) {
+    this.router.navigate(['/result'], {
+      queryParams: {
+        name
+      }
+    });
   }
 }
