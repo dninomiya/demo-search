@@ -15,8 +15,12 @@
       <ais-hits>
         <ng-template let-hits="hits">
           <ol class="ais-Hits-list">
-            <li *ngFor="let hit of hits" class="ais-Hits-item">
-              {{ hit.name }}
+            <li
+              *ngFor="let hit of hits | mergeUser | async"
+              class="ais-Hits-item"
+            >
+              <span>名前: {{ hit.name }}</span>
+              <span>トレーナー: {{ hit.trainer }}</span>
             </li>
           </ol>
         </ng-template>

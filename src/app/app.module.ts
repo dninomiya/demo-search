@@ -16,13 +16,17 @@ import {
 } from '@angular/material';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MergeUserPipe } from './merge-user.pipe';
+import { MergeArticlePipe } from './merge-article.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchInputComponent,
     TopComponent,
-    ResultComponent
+    ResultComponent,
+    MergeUserPipe,
+    MergeArticlePipe
   ],
   imports: [
     BrowserModule,
